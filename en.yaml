@@ -5,27 +5,27 @@ about: |
   <b>Msgs:</b> {{count}}.
   <b>Msg rate:</b> {{r_hours}} msgs/hr, {{r_days}} msgs/day.
 
-  Bot is built on platform @ChatFactoryBot, version <i>{{version}}</i>.
+  Bot is built on a platform @ChatFactoryBot, version <i>{{version}}</i>.
   Rocketgram version <i>{{rocketgram_version}}</i>.
 
-  If you have questions about using platform or bots' development - contact @RocketBotsBot.
+  If you have any questions about using platform or bots' development - contact @RocketBotsBot.
 
   Platform news: @ChatFactory.
 
 help: |
   <b>[BOT]</b> Supported commands:
 
-  /start - <i>Enter an anonymous chat</i>
-  /stop - <i>Leave chat</i>
-  /nick - <i>Change nick</i>
-  /list - <i>List of users in a chat</i>
-  % - <i>Write in the third person</i>
-  $ - <i>Write hidden message</i>
-  # - <i>Write hidden and protected message</i>
-  /last - <i>Show last exited users</i>
+  /start - <i>Enter the anonymous chat</i>
+  /stop - <i>Leave the chat</i>
+  /nick - <i>Change your nickname</i>
+  /list - <i>List of users in the chat</i>
+  % - <i>Write in third person</i>
+  $ - <i>Send hidden message</i>
+  # - <i>Send hidden and protected message</i>
+  /last - <i>Show users who recently left the chat</i>
   /msg - <i>Send a private message</i>
   /getmsg - <i>Get private messages</i>
-  /notify - <i>Notificatios of messages in chat</i>
+  /notify - <i>Notifications settings</i>
   /poll - <i>Create a poll</i>
   /polldone - <i>End a poll</i>
   /vote - <i>Vote</i>
@@ -33,25 +33,25 @@ help: |
   /info [CODE] - <i>See information about a user</i>
   /hug [CODE] - <i>Hug a user</i>
   /slap [CODE] - <i>Slap a user</i>
-  /search [TEXT] - <i>Search a user by a nick</i>
-  <i>/harakiri</i> [MINUTES|R] - <i>Make harakiri!</i>
-  /ping - <i>Check bot''s operability</i>
+  /search [TEXT] - <i>Search a user by their nickname</i>
+  <i>/harakiri</i> [MINUTES|R] - <i>Commit harakiri!</i>
+  /ping - <i>Check bot's operability</i>
   /rules - <i>Chat's rules</i>
-  /about - <i>Information about a bot</i>
+  /about - <i>Information about the bot</i>
   {% if user.is_moderator or user.is_admin or user._id == owner %}
 
   <b>Moderator''s commands:</b>
 
-  /mute [CODE] [MINUTES] - <i>Void a user''s voice</i>
+  /mute [CODE] [MINUTES] - <i>Mute a user</i>
   {%if options.silent_cmds%}/sban, {%endif%}/ban [CODE] - <i>Ban a user</i>
   /rename [CODE] [NICK] - <i>Rename a user</i>
-  /addach [CODE] [ACH] [TEXT] - <i>Add achievement</i>
-  /rmach [CODE] [ACH] - <i>Remove achievement</i>
+  /addach [CODE] [ACH] [TEXT] - <i>Award user an achievement</i>
+  /rmach [CODE] [ACH] - <i>Remove an achievement from user</i>
   /kick [CODE] - <i>Kick a user</i>
-  /resident [CODE] - <i>Change a resident status</i>
-  /freeze [CODE] - <i>Forbid nick change</i>
-  /textual [CODE] - <i>Text only mode</i>
-  /del - <i>Delete message from chat</i>
+  /resident [CODE] - <i>Change residency status</i>
+  /freeze [CODE] - <i>Prohibit a user from changing their nickname</i>
+  /textual [CODE] - <i>Restrict a user to text only</i>
+  /del - <i>Delete a message from the chat</i>
   {%endif%}{%if user.is_admin or user._id == owner%}
 
   <b>Admin's commands:</b>
@@ -60,21 +60,21 @@ help: |
   /setslap [CODE] [TEXT] - <i>Set a personal slap</i>
   /changeid [CODE] [NEW] - <i>Change user's ID</i>
   /addmod [CODE] - <i>Add a moderator</i>
-  /rmmod [CODE] - <i>Delete a moderator</i>
+  /rmmod [CODE] - <i>Dismiss a moderator</i>
   /unban [CODE] - <i>Unban a user</i>
-  /say [TEXT] - <i>Say from bot</i>
+  /say [TEXT] - <i>Send a message on bot's behalf</i>
   /poll_kill - <i>Kill poll(danger!)</i>
 
   {%endif%}{%if user._id == owner%}
   <b>Owner's commands:</b>
 
-  /addadmin [CODE] - <i>Add an admin</i>
+  /addadmin [CODE] - <i>Make user an admin</i>
   /rmadmin [CODE] - <i>Delete an admin</i>
   /options - <i>See chat's settings</i>
   /option [NAME] [VALUE] - <i>Change chat's setting</i>
   {%endif%}
 
-  Most commands may be used in reply instead of enter CODE.
+  Most commands can be used in reply instead of enter CODE.
 
 common:
   kb:
@@ -89,15 +89,15 @@ common:
   luna: |
     {%if minutes < 5 and days <= 0%}🌕{%elif minutes < 60 and days <= 0%}🌖{%elif minutes < 60 * 12 and days <= 0%}🌗{%elif hours < 24 and days <= 0%}🌘{%else%}🌑{%endif%}
   noresident: |
-    <b>[BOT]</b> Very sorry, but this command is only for chat's residents.
+    <b>[BOT]</b> Sorry, this command is for chat's residents only.
   unknown: |
-    <b>[BOT]</b> I don't know this command. Press /help, To see all available commands.
+    <b>[BOT]</b> Unknown command. Press /help, To see all available commands.
   cancelled: |
     <b>[BOT]</b> Cancelled. 👌
   fail: |
-    <b>[BOT]</b> Can not. 😔
+    <b>[BOT]</b> Can not do that. 😔
   fail_alert: |
-    Can not. 😔
+    Can not do that. 😔
 
 info:
   kb:
@@ -189,24 +189,24 @@ poll:
   start: |
     <b>[BOT]</b> You are starting a {%if inline%}inline poll{%else%}poll{%endif%}.
 
-    Enter the question and answers one by line like this:
+    Enter the question and answers line by line like this:
 
     <i>Question?
     Answer1
     Answer2
     Answer3</i>
 
-    {%if inline%}Poll will be valid one hour. {%endif%}Click /cancel for cancel.
-  started: <b>[BOT]</b> Poll started! To end a poll use /polldone.
+    {%if inline%}Poll will be active for one hour. {%endif%}Click /cancel for cancel.
+  started: <b>[BOT]</b> Poll started! To end the poll use /polldone.
   inline: |
-    <b>[Bot]</b> #{{poll.code_display}} {{poll.nick}} put a question:
+    <b>[Bot]</b> #{{poll.code_display}} {{poll.nick}} asked a question:
     <i>{{poll.question}}</i>
 
     {%for v in poll.variants%}
     {%if loop.index0==selected%}✔{%endif%}{{map[loop.index0]}} - <i>{{v}}</i>
     {%endfor%}
   poll: |
-    {%if started%}<b>[Bot]</b> The poll is announced!{%else%}<b>[BOT]</b>{%endif%} #{{user.code_display}} {{user.nick}} put a question:
+    {%if started%}<b>[Bot]</b> The poll has started!{%else%}<b>[BOT]</b>{%endif%} #{{user.code_display}} {{user.nick}} asked a question:
     <i>{{poll.question}}</i>
 
     {%if vote%}Choose an option:{%endif%}
@@ -231,10 +231,10 @@ poll:
 
   notification:
     start: |
-      <b>[BOT]</b> In chat{%if bot%} @{{bot}}{%endif%} the poll is announced! #{{user.code_display}} {{user.nick}} put a question:
+      <b>[BOT]</b> In chat{%if bot%} @{{bot}}{%endif%} the poll has started! #{{user.code_display}} {{user.nick}} asked a question:
       <i>{{poll.question}}</i>
     chat: |
-      <b>[Bot]</b> The poll is active! #{{user.code_display}} {{user.nick}} put a question:
+      <b>[Bot]</b> The poll is active! #{{user.code_display}} {{user.nick}} asked a question:
 
       <i>{{poll.question}}</i>
 
@@ -243,25 +243,25 @@ poll:
     <b>[BOT]</b> Start of{%if inline%}inline poll{%else%}poll{%endif%} was canceled.
   error: |
     <b>[BOT]</b> {%if inline%}Inline poll{%else%}Poll{%endif%} must contains from 2 to 10 response options.
-    Try again or click /cancel for cancel.
+    Try again or click /cancel to cancel.
   text_only: |
     <b>[BOT]</b> Use text only.
   not_active_inline: |
     Poll is not active.
   not_active: |
-    <b>[BOT]</b> Poll is not active. To start your poll use a command /poll.
+    <b>[BOT]</b> There is no active poll at the moment. To start your own poll use a command /poll.
   vote_ok: |
     Your vote is counted.
   done_fail: |
-    <b>[BOT]</b> Only moderator or a poll's owner can end a poll.
+    <b>[BOT]</b> Only a moderator or a poll's owner can end a poll.
   alredy_active: |
-    <b>[BOT]</b> Poll is already active. #{{user.code_display}} {{user.nick}} put a question:
+    <b>[BOT]</b> Poll is already active. #{{user.code_display}} {{user.nick}} asked a question:
     <i>{{poll.question}}</i>
 
-    Already voted {{poll.answers|length}} of users.
+     {{poll.answers|length}} users have already voted.
     To vote use a command /vote.
   in_progress: |
-    <b>[BOT]</b> Someone already started a poll but didn't stop it yet. You need to wait.
+    <b>[BOT]</b> There is a poll in progress. Please wait for the current poll to end before starting your own.
   vote_ended: |
     This poll has ended.
 
@@ -278,7 +278,7 @@ list:
 
 last:
   text: |
-    <b>[BOT]</b> Recently exited:
+    <b>[BOT]</b> Users who recently left the chat:
 
     {%for u in users%}
     {{T('common/symbol', user=u)}}#{{u.code_display}} {{u.nick}}, {{u.last_activity|elapsed()}}
@@ -293,7 +293,7 @@ search:
     {%endfor%}
     {%if too_many%}
 
-    <i>Too many accounts was found. Specify your inquiry.</i>{%endif%}
+    <i>Too many accounts were found. Specify your inquiry.</i>{%endif%}
   nothing: |
     <b>[BOT]</b> Nothing was found.
 
@@ -317,55 +317,55 @@ message:
       Hidden audio from #{{user.code_display}} {{user.nick}}{%if caption%}:  <tg-spoiler>{{caption}}</tg-spoiler>{%else%}.{%endif%}
   edition:
     noresident: |
-      <b>[BOT]</b> Only resident can edit messages.
+      <b>[BOT]</b> Only residents can edit messages.
     forbidden: |
       <b>[BOT]</b> Can't edit this message.
     timeout: |
       <b>[BOT]</b> Message editing timeout.
   not_sent: |
-    <b>[BOT]</b> Bot doesn't send such thing.
+    <b>[BOT]</b> Bot can't send such a thing.
   flood: |
-    <b>[BOT]</b> Too much messages! Wait a little before write more!
+    <b>[BOT]</b> Too many messages! Wait a little before sending more!
   filtered: |
-    <b>[Bot]</b> Very sorry, but you can't send links!
+    <b>[Bot]</b> Sorry, but you are not allowed to send links!
   stickers_too_fast: |
     <b>[Bot]</b> Too much stickers! Wait {{seconds}} more seconds!
   text_only: |
     <b>[BOT]</b> You're restricted to text only.
   albums_not_allowed: |
-    <b>[BOT]</b> There is no way to send albums to this chat, sorry.
+    <b>[BOT]</b> Albums can't be sent to this chat, sorry.
   notification: |
     <b>[BOT]</b> Reply from #{{user.code_display}} {{user.nick}}{%if bot%} in chat @{{bot}}{%endif%}{%if hash%} - #{{hash}}{%endif%}.
   forbid: |
-    <b>[BOT]</b> You (or this user) has forbidden to reply to his messages. Your message was not sent. 🤷‍♂️
+    <b>[BOT]</b> This user (or you) has forbidden you to reply to their messages. Your message was not sent. 🤷‍♂️
 
 harakiri:
   all: |
-    <b>[Bot]</b> #{{user.code_display}} {{user.nick}} makes harakiri and can't back to chat in {{user.harakiri_till|remaining(show_seconds=True)}}.
+    <b>[Bot]</b> #{{user.code_display}} {{user.nick}} commits harakiri and can't return to chat for {{user.harakiri_till|remaining(show_seconds=True)}}.
   text: |
-    <b>[BOT]</b> You make harakiri and you can back to chan in {{user.harakiri_till|remaining(show_seconds=True)}}.
+    <b>[BOT]</b> You commited harakiri and you will be able to return to chat in {{user.harakiri_till|remaining(show_seconds=True)}}.
   fail: |
     <b>[BOT]</b> Fail.
-    For this command to work enter /harakiri and ammount of minutes (from 1 to 10080) or R to play a game.
+    For this command to work enter /harakiri and ammount of minutes (from 1 to 10080) or R to play a game of chance.
 nick:
   enter: |
-    <b>[BOT]</b> Your nick now - {{user.nick}}
+    <b>[BOT]</b> Your nickname is now - {{user.nick}}
 
-    Enter a new nick or press /cancel for cancel.
+    Enter a new nickname or press /cancel to cancel.
   all: |
-    <b>[Bot]</b> #{{user.code_display}} {{old_nick}} changed nick to {{user.nick}}
+    <b>[Bot]</b> #{{user.code_display}} {{old_nick}} changed their nickname to {{user.nick}}
   bad: |
-    <b>[BOT]</b> This nick does not fit.
+    <b>[BOT]</b> This nickname is unsuitable.
   canceled: |
     <b>[BOT]</b> Nick change was canceled.
   frozen: |
     <b>[BOT]</b> You are not allowed to change your nickname.
   taken: |
-    <b>[BOT]</b> This nick is already taken{%if taken_by%} by #{{taken_by.code_display}} {{taken_by.nick}}{%endif%}.
+    <b>[BOT]</b> This nickname is already taken{%if taken_by%} by #{{taken_by.code_display}} {{taken_by.nick}}{%endif%}.
   long: |
-    <b>[BOT]</b> Nick is too long.
+    <b>[BOT]</b> This nickname is too long.
   msg: |
-    <b>[BOT]</b> Your new nick - {{user.nick}}.
+    <b>[BOT]</b> Your new nick is - {{user.nick}}.
 
 notify:
   kb:
@@ -414,7 +414,7 @@ owner:
       Current value: <b>{{options.lang}}</b>.
 
       🔹 <b>rules</b> - chat's rules.
-      Html-formatting can be used. Tags need to be closed necessarily. Attached tags don't work. In case of mistake in tags, commands would not be working.
+      Html-formatting can be used. Tags need to be closed. Attached tags don't work. In case of a mistake in tags, commands would not work.
       Current value: hit /rules.
 
       🔹 <b>silent_start</b> - don't show start messages in chat.
@@ -423,7 +423,7 @@ owner:
       🔹 <b>silent_stop</b> - don't show stop messages in chat.
       Current value: <b>{{options.silent_stop}}</b>.
 
-      🔹 <b>silent_cmds</b> - allow use silent admin's commands.
+      🔹 <b>silent_cmds</b> - allow usage of silent admin's commands.
       Current value: <b>{{options.silent_cmds}}</b>.
 
       🔹 <b>filter_albums</b> - filter albums.
@@ -432,10 +432,10 @@ owner:
       🔹 <b>new_textual</b> - newcomers will have TEXT status.
       Current value: <b>{{options.new_textual}}</b>.
       
-      🔹 <b>delete_owner</b> - when deleting, delete the message also from the sender.
+      🔹 <b>delete_owner</b> - when deleting, delete the message for the sender as well.
       Current value: <b>{{options.delete_owner}}</b>.
     ok: |
-      <b>[BOT]</b> Setting was saved.
+      <b>[BOT]</b> Settings were updated.
   admins:
     added: |
       <b>[BOT]</b> User #{{user.code_display}} {{user.nick}} was succesfully added to admins.
@@ -454,7 +454,7 @@ admin:
     /sethug #CODE text of hug
     /setslap #CODE text of slap
 
-    Text could contains placeholders and must contains proper html-formatting. For example:
+    Text could contain placeholders and must contain proper html-formatting. For example:
 
     <code>&lt;b&gt; *&lt;/b&gt; &lt;i&gt;#$from_code $from_nick hugs #$to_code $to_nick.&lt;/i&gt;</code>
   sethug: |
@@ -509,27 +509,27 @@ moderator:
 
 achievement:
   added: |
-    <b>[Bot]</b> User #{{user.code_display}} {{user.nick}} got new achievement:
+    <b>[Bot]</b> User #{{user.code_display}} {{user.nick}} acquired a new achievement:
 
     {{symbol}} - {{text}}
   removed: |
-    <b>[Bot]</b> User #{{user.code_display}} {{user.nick}} lost achievement:
+    <b>[Bot]</b> User #{{user.code_display}} {{user.nick}} lost an achievement:
 
     {{symbol}} - {{text}}
 
 ban:
   all: |
-    <b>[Bot]</b> #{{user.code_display}} {{user.nick}} is banned forever!
+    <b>[Bot]</b> #{{user.code_display}} {{user.nick}} was banned forever!
   text: |
-    <b>[BOT]</b> To my great regrets, you were baned! Seems like your behaviour was bad. Don't write here anymore.
+    <b>[BOT]</b> Unfortunately, you were baned! Seems like you kept breaking the rules. Don't write here anymore.
 
 mute:
   all: |
     <b>[Bot]</b> #{{user.code_display}} {{user.nick}} is muted for {{user.muted_till|remaining(show_seconds=True)}}.
   text: |
-    <b>[BOT]</b> Your voice was voided in a chat for {{user.muted_till|remaining(show_seconds=True)}}.
+    <b>[BOT]</b> You were muted in the chat for {{user.muted_till|remaining(show_seconds=True)}}.
 
-    Your messages, pictures and stickers aren''t displaying in a chat, bot doesn't show that you have entered or left. Wait till time run out and don't piddle no more.
+    Your messages, pictures and stickers aren't displaying in the chat, bot doesn't show that you have entered or left. Wait until mute time runs out and don't be naughty no more.
 
     Your availible commands: /start, /stop and /rules.
 
@@ -537,13 +537,13 @@ kick:
   all: |
     <b>[Bot]</b> #{{user.code_display}} {{user.nick}} was kicked for {{user.kicked_till|remaining(show_seconds=True)}}.
   text: |
-    <b>[BOT]</b> You're kicked. You can to come back in {{user.kicked_till|remaining(show_seconds=True)}}.
+    <b>[BOT]</b> You were kicked. You can to come back in {{user.kicked_till|remaining(show_seconds=True)}}.
 
 rename:
   all: |
     <b>[Bot]</b> #{{user.code_display}} {{user.nick}} was renamed to {{nick}}.
   text: |
-    <b>[BOT]</b> You were renamed. Your new nick - {{nick}}.
+    <b>[BOT]</b> You were renamed. Your new nickname is - {{nick}}.
 
 pong: |
   <b>[BOT]</b> <i>pong</i>.
@@ -560,11 +560,11 @@ private:
 
   notification: |
     <b>[BOT]</b> You have a private message from #{{user.code_display}} {{user.nick}}{%if bot%} in chat @{{bot}}{%endif%}.
-    {%if offline%}Enter a chat(/start), to get it.{%endif%}
+    {%if offline%}Enter the chat(/start), to get it.{%endif%}
   empty: |
-    {%if not callback%}<b>[BOT]</b> {%endif%}There's no private messages for you.
+    {%if not callback%}<b>[BOT]</b> {%endif%}There are no private messages for you.
   remind: |
-    <b>[BOT]</b> There's {{num}} private messages waiting for you.
+    <b>[BOT]</b> There are {{num}} private messages waiting for you.
 
   send:
     canceled: |
@@ -594,7 +594,7 @@ slap:
   list: |
     <b>[BOT]</b> Choose a user to slap:
   slow: |
-    <b>[BOT]</b> It's not necessary to flap a trout so often!
+    <b>[BOT]</b> No need to swing a trout so often!
   notification: |
     <b>[BOT]</b> Slap from #{{user.code_display}} {{user.nick}}{%if bot%} in chat @{{bot}}{%endif%}{%if hash%} - #{{hash}}{%endif%}.
 
@@ -604,31 +604,31 @@ hug:
   list: |
     <b>[BOT]</b> Choose a user to hug:
   slow: |
-    <b>[BOT]</b> It's not necessary to hugs so often!
+    <b>[BOT]</b> No need to hug so often!
   notification: |
     <b>[BOT]</b> Hug from #{{user.code_display}} {{user.nick}}{%if bot%} in chat @{{bot}}{%endif%}{%if hash%} - #{{hash}}{%endif%}.
 
 start:
   all: |
-    <b>[Bot]</b> #{{user.code_display}} {{user.nick}} enteres chat.{%if new%} <b>He's new!</b>{%endif%}
+    <b>[Bot]</b> #{{user.code_display}} {{user.nick}} enters chat.{%if new%} <b>He's new!</b>{%endif%}
   text: |
-    <b>[BOT]</b> You entered a chat. Your nick - {{user.nick}}. To leave a chat press /stop.
+    <b>[BOT]</b> You entered the chat. Your nickname is - {{user.nick}}. To leave a chat press /stop.
   welcome: |
     <b>[BOT]</b> Welcome to anonymous chat.
-    To leave a chat print /stop
+    To leave the chat type /stop
 
-    There is a random nick generated for you - {{user.nick}}.
+    A random nickname was generated for you - {{user.nick}}.
     If you don''t like it, you can come up with your own and set it with command /nick
     <b>Have a nice chat!</b>
   started: |
-    <b>[BOT]</b> Already in a chat. To leave a chat press /stop.
+    <b>[BOT]</b> You are already in the chat. To leave a chat press /stop.
   not_started: |
-    <b>[BOT]</b> You are not in a chat. To start press /start.
+    <b>[BOT]</b> You are not in the chat. To start press /start.
 
 stop:
   all: |
-    <b>[Bot]</b> #{{user.code_display}} {{user.nick}} leaves chat.{%if banned%} <b>This rascal has banned a bot!</b>{%endif%}{%if cleaner%} <b>He quiet long time ago.</b>{%endif%}
+    <b>[Bot]</b> #{{user.code_display}} {{user.nick}} leaves chat.{%if banned%} <b>This rascal has banned the bot!</b>{%endif%}{%if cleaner%} <b>He quiet long time ago.</b>{%endif%}
   text: |
-    <b>[BOT]</b> You left chat. Come back soon!
+    <b>[BOT]</b> You left the chat. Come back soon!
 
     To enter again - press /start.
